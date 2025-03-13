@@ -1,81 +1,80 @@
-
-import { BrowserRouter as Router, Routes, Route, Form } from "react-router-dom";
-import { Navbar } from "./Components/Navbar/Navbar";
-import Shop from "./Pages/Shop";
-import Cart from "./Pages/Cart";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUsers, loadUser } from "./action/User";
+import { useEffect } from "react";
+import { getAllServices, getLoggedinUserAllServices } from "./action/Service";
+import { getAllProducts } from "./action/Product";
+import Dashboard from "./Pages/Dashboard/Shop";
+import ShippingInfo from "./Components/Shippinginfo/ShippingInfo";
 import Product from "./Pages/Product";
 import Footer from "./Components/Footer/Footer";
-import ShopCategory from "./Pages/ShopCategory";
-import women_banner from "./Components/Assets/banner_women.png";
-import men_banner from "./Components/Assets/banner_mens.png";
-import kid_banner from "./Components/Assets/banner_kids.png";
-import LoginSignup from "./Pages/LoginSignup";
-import LocationPage from "./Components/LocationPage/LocationPage"
-import FarmingDrone from "./Components/FarmingDrone/FarmingDrone";
-import FarmingRobot from "./Components/FarmingRobot/FarmingRobot";
-import IndustrialRobot from "./Components/IndustrialRobot/IndustrialRobot";
-import DomesticRobot from "./Components/DomesticRobot/DomesticRobot";
-import ShopPages from "./Components/ShopPages/ShopPages";
-import ProductPage from "./Components/ShopPages/ProductPages";
-import AccountPage from "./Components/AccountPages/AccountPages";
-import MenuPage from "./Components/MenuPages/MenuPages";
-import AboutPage from "./Components/AboutPage/AboutPage";
-import PrivacyPage from "./Components/PrivacyPage/PrivacyPage";
-import RecallsPage from "./Components/RecallsPage/RecallsPage";
-import ContactPage from "./Components/ContactPageAbove/ContactPages";
-import NewsPage from "./Components/NewsPage/NewsPage";
-import UpdatesPage from "./Components/UpdatesPage/UpdatesPage";
-import Company from "./Components/Company/Company";
-
+import Navbar from "./Components/Navbar/Navbar";
+import Register from "./Components/Register/Register";
+import Login from "./Components/Login/Login";
+import AfterLoginNavbar from "./Components/AfterLoginNavbar/AfterLoginNavbar";
+import Services from "./Components/Services/Services";
+import BookServices from "./Components/BookServices/BookServices";
+import Profile from "./Components/Profile/Profile";
+import UserProfile from "./Components/UserProfile/UserProfile";
+import SearchJobPage from "./Components/SearchJobPage/SearchJobPage";
+import AdminDashboard from "./Components/AdminDashboard/AdminDashboard";
+import Order from "./Components/Order/Order";
+import Loader from "./Components/Loader/Loader";
+import AOS from "aos"
+import Aos from "aos";
+import ProductDescription from "./Components/ProductDescription/ProductDescription";
 function App() {
+  const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { products, loading: productLoader } = useSelector((state) => state.AllProducts);
 
+  const { users, loading: userLoading } = useSelector((state) => state.getAllUsers);
+  const { allservices, loading: allServicesLoading } = useSelector((state) => state.getAllServices);
+  const { loggedinuserservice, loading: loadingUserServices } = useSelector((state) => state.loggedinuserservice);
+
+  useEffect(() => {
+   
+    dispatch(getAllUsers());
+    dispatch(loadUser());
+    dispatch(getAllServices());
+    dispatch(getLoggedinUserAllServices());
+   dispatch(getAllProducts())
+  }, [dispatch, allservices.length, isAuthenticated]);
+
+  
+
+  useEffect(() => {
+   AOS.init({
+    duration:2000
+   })
+   Aos.refresh()
+  }, []);
   return (
-    <div>
-      <Router>
-        <Navbar/>
+    <Router> {/* ✅ Ensure Router wraps the entire JSX */}
+      {isAuthenticated && user ? <AfterLoginNavbar user={user} /> : <Navbar />}
+      
+      {!productLoader || !userLoading || !allServicesLoading || !loadingUserServices ? (
         <Routes>
-          <Route path="/" element={<Shop gender="all" />} />
-          <Route path="/mens" element={<ShopCategory banner={men_banner} category="men" />} />
-          <Route path="/womens" element={<ShopCategory banner={women_banner} category="women" />} />
-          <Route path="/kids" element={<ShopCategory banner={kid_banner} category="kid" />} />
-          <Route path='/product' element={<Product />}>
-          <Route path=':productId' element={<Product />} />
-          </Route>
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/login" element={<LoginSignup/>} />
-          <Route path="/product/:productId" element={<Product />} />
-<Route path="/cart/:product" element={<Cart />} />
-<Route path="/location" element={<LocationPage/>} />
-<Route path="/farmingdrone" element={<FarmingDrone/>} />
-<Route path="/FarmingRobot" element={<FarmingRobot />} />
-<Route path="/IndustrialRobot" element={<IndustrialRobot/>} />
-<Route path="/DomesticRobot" element={<DomesticRobot/>} />
-<Route path="/shop"  element={<ShopPages/>} />
-<Route path="/shop/product/:productId" element={<ProductPage/>} />
-<Route path="/Account" element={<AccountPage/>} />
-<Route path="/Menu" element ={<MenuPage/>} />
-<Route path="/about" element={<AboutPage/>} />
-<Route path="/privacy" element={<PrivacyPage/>} />
-<Route path="/recalls" element={<RecallsPage/>} />
-<Route path="/contact" element={<ContactPage/>} /> {/* Add this route */}
-<Route path="/news" element={<NewsPage/>} /> {/* Add this route */}
-<Route path="/updates" element={<UpdatesPage/>} /> {/* Add this route */}
-<Route path="/about" element={<Footer/>}/>
-<Route path="/privacy" element={<Footer/>}/>
-<Route path="/recalls" element={<Footer/>}/>
-<Route path="/contact" element={<Footer/>}/>
-<Route path="/news" element={<Footer/>}/>
-<Route path="/updates" element={<Footer/>}/>
-<Route path="/Account" element={<Footer/>}/>
-<Route path="/company" element={<Company/>}/>
-
-
-
-
+          <Route path="/" element={<Dashboard allservices={allservices} user={user} />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/admindashboard" element={<AdminDashboard users={users} user={user} />} />
+          <Route path="/shippinginfo" element={<ShippingInfo />} />
+          <Route path="/SearchJobPage" element={<SearchJobPage user={user} />} />
+          <Route path="/bookservice/:id" element={<BookServices />} />
+          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/product/:id" element={<ProductDescription/>} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/product" element={<Product products={products} />} />
+          <Route path="/userProfile" element={<UserProfile user={user} loggedinuserservice={loggedinuserservice} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/Allservices" element={<Services allservices={allservices} />} />
         </Routes>
-        <Footer />
-      </Router>
-    </div>
+      ) : (
+        <Loader/>
+      )}
+      
+      <Footer />
+    </Router>
   );
 }
 
