@@ -10,7 +10,7 @@ Location Filtering: Results are automatically sorted by distance from the user
 
 Technologies Used
 
-Frontend: [Next.js Google-api,redux,Razorpay,]
+Frontend: [React.js Google-api,redux,Razorpay,]
 Backend: [node.js,cloudinary]
 Database: [MongoDb]
 Maps/Geolocation: [ , Google Maps API, Mapbox]
