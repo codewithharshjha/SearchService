@@ -1,10 +1,10 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import {  useSelector } from 'react-redux'
 
 import ServiceBox from '../../Pages/ServiceBox';
 
 const Services= ({ allservices }) => {
-    const dispatch = useDispatch();
+    
     // This will correctly log the array of allservices
   
    

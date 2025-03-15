@@ -3,9 +3,10 @@ import "./AdminDashboard.css";
 import CreateProductpage from "../CreateProductpage/CreateProductpage";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../action/Product";
+import Loader from "../Loader/Loader";
 
 const AdminDashboard = ({ users, user }) => {
-  const { products, loading, error } = useSelector((state) => state.AllProducts);
+  const { products, loading } = useSelector((state) => state.AllProducts);
   console.log(products);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -13,7 +14,7 @@ const AdminDashboard = ({ users, user }) => {
   }, []);
   const [activeTab, setActiveTab] = useState("users"); // Default to 'users'
 
-  return (
+  return loading ?<Loader/>: (
     <>
       <div className="bg-gray-100 dark:bg-gray-900 dark:text-white text-gray-600 h-screen flex overflow-hidden text-sm">
         {/* Sidebar */}

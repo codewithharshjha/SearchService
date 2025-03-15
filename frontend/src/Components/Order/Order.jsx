@@ -1,17 +1,15 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
+import {  useLocation } from 'react-router-dom'
 import { Bookproduct } from '../../action/Product'
-import Shippinginfo from '../Shippinginfo/ShippingInfo'
+
 
 const Order = () => {
     const location=useLocation()
     const dispatch=useDispatch()
-    const {isAuthenticated,user}=useSelector((state)=>state.user)
+    const {user}=useSelector((state)=>state.user)
     const {shippinginfodata,product}=location.state
-    console.log(shippinginfodata)
-    console.log(user)
-    console.log(product)
+ 
   return !shippinginfodata || !product ||!user ? (
     
     <>

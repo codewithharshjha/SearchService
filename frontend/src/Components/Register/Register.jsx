@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -86,46 +86,3 @@ const Register = () => {
 
 export default Register;
 
-
- {/* <input
-          type="text"
-          value={name}
-          placeholder="Name"
-          className="registerInputs"
-          required
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <input
-          type="email"
-          placeholder="Email"
-          className="registerInputs"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-  <input
-          type="text"
-          placeholder="Enter phone number"
-          className="registerInputs"
-          required
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-        <input
-          type="password"
-          className="registerInputs"
-          placeholder="Password"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-<input
-          type="password"
-          placeholder="Confrim Password"
-          className="registerInputs"
-          required
-          value={confrimPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        /> */}

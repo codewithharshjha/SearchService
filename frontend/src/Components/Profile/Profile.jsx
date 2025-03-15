@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getUserProfile } from '../../action/User'
 import {useDispatch, useSelector} from "react-redux"
-import { GoogleMap, LoadScript, Autocomplete, Marker } from "@react-google-maps/api";
+import { GoogleMap, LoadScript,  Marker } from "@react-google-maps/api";
 const Profile = () => {
     const params=useParams()
     

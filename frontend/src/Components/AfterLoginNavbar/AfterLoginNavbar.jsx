@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { SearchedServices } from '../../action/Service'
-import { logoutUser } from '../../action/User'
+
 import{Squash} from "hamburger-react"
 const AfterLoginNavbar = ({user}) => {
   const location=useLocation()
@@ -43,7 +43,7 @@ console.log('user from afterloginservices',user)
         <Link to="/product" className="bg-blue-700 md:bg-transparent text-white block pl-3 pr-4 py-2 md:text-blue-700 md:p-0 rounded" aria-current="page">Product</Link>
       </li>
       {
-          user?.role=="admin"&&(
+          user?.role==="admin"&&(
    <>
 <li>
 
@@ -71,7 +71,7 @@ console.log('user from afterloginservices',user)
     </button>
   
     {
-      location.pathname=="/Allservices" && (
+      location.pathname==="/Allservices" && (
        
 
 <form className="flex items-center max-w-sm mx-auto"onSubmit={submitsearch}>   
@@ -99,7 +99,7 @@ console.log('user from afterloginservices',user)
    
     <div className=' ml-10 flex gap-5' >
 <Link to="/userprofile">
-<img className="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="/favicon.ico"/>
+<img className="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="/favicon.ico"alt='logo'/>
 </Link>
 {/* <button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 "onClick={dispatch(logoutUser())}>Logout</button> */}
 
@@ -127,7 +127,7 @@ console.log('user from afterloginservices',user)
           <Link to="/Allservices"  className={getLinkClass("/Allservices")}>Services</Link>
         </li>
         {
-          user?.role=="admin"&&(
+          user?.role==="admin"&&(
    <>
 <button>
 <Link to="/admindashboard" className={getLinkClass("/admindashboard")}>Admin</Link>

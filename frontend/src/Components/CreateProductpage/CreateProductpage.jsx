@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createproductaction, getAllProducts } from "../../action/Product";
 import Loader from "../Loader/Loader";
-import ErrorLoader from "../ErrorLoader/ErrorLoader";
-import { toast } from "react-toastify";
+
+
 
 const CreateProductPage = () => {
   const { loading, error } = useSelector((state) => state.CreateProduct);

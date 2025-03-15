@@ -8,8 +8,8 @@ import ReviewCard from '../ReviewCard/ReviewCard'
 // import { createReview } from '../../action/Review' // Assuming you have an action to create a review
 
 const ProductDescription = () => {
-    const { loading, product, error } = useSelector((state) => state.getProducuctDetail)
-    const { loading:productreviewloading, reviews, error:productreveiw} = useSelector((state) => state.getproductreview)
+    const { loading, product } = useSelector((state) => state.getProducuctDetail)
+    const { loading:productreviewloading, reviews} = useSelector((state) => state.getproductreview)
     const {loading:reviewloading,status}=useSelector((state)=>state.createReview)
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -47,8 +47,8 @@ console.log(rating)
       
     }, [dispatch, id,reviews.length])
    
-    console.log(reviews)
-if(status=='200'){
+
+if(status==='200'){
     return toast("Review Created")
 }
     return loading || reviewloading||productreviewloading ? (
@@ -60,7 +60,7 @@ if(status=='200'){
                     <div className="md:flex-1 px-4">
                         <div className="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
                             {product.images.length === 1 ? (
-                                <img className="w-full h-full object-cover" src={product.images[0].url} alt="Product Image" />
+                                <img className="w-full h-full object-cover" src={product.images[0].url} alt="Product" a/>
                             ) : (
                                 <>
                                     <div id="default-carousel" className="relative w-full" data-carousel="slide">

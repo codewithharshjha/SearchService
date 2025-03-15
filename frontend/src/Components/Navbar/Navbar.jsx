@@ -1,17 +1,12 @@
 import React, { useState, useRef, useContext } from 'react';
 import './Navbar.css';
-import logo from "../Assets/logo.png";
-import logo1 from "../Assets/teslaroboat-logo.png";
-import cart_icon from "../Assets/cart_icon.png";
+
 import { Link } from "react-router-dom";
 import { ShopContext } from "../../Context/ShopContext";
 
-import { useSelector } from 'react-redux';
 
 const Navbar = () => {
-    const [menu, setMenu] = useState("shop");
-    const { getTotalCartItems } = useContext(ShopContext);
-    const menuRef = useRef();
+  
     
 
    

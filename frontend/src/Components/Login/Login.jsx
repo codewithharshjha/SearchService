@@ -26,7 +26,7 @@ const Login = () => {
  toast.error(`${error}`)
       dispatch({ type: "clearErrors" });
     }
-  }, [isAuthenticated, error, , dispatch, navigate]); // ✅ Dependencies added
+  }, [isAuthenticated, error, dispatch, navigate]); // ✅ Dependencies added
 
   const loginHandler = (e) => {
     e.preventDefault();
